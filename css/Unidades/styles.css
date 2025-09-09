@@ -1,0 +1,22 @@
+div{
+    background-color: rgb(178, 162, 162);
+    padding: 20px;
+    font-family:  sans-serif;
+    border-left: 5px solid rgb(145, 104, 104);
+}
+
+
+
+h1{
+    margin: 0;
+    font-size: 24px;
+}
+span{
+    color: rgb(40, 34, 34);
+    font-size: 16px;
+    font-weight: 100;
+}
+p{
+    color: rgb(87, 77, 77);
+   
+}    

@@ -1,0 +1,13 @@
+
+.box{
+
+    width: 200px;
+    height: 200px;
+    background:linear-gradient(to right, red, green);
+    margin: 0;
+    border-radius: 7px ;
+    margin: auto;
+    margin-top: 20px;
+    border-top: 6px solid rgb(145, 104, 104);
+}
+

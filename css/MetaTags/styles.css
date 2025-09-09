@@ -1,0 +1,13 @@
+li{
+    color: blue;
+}
+.ingrediente.faltante{
+    color: red;
+}
+.ingrediente.secreto{
+    color: green;
+}
+.p{
+    font-size: 20px;
+    color: rgb(64, 0, 128);
+}

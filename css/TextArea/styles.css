@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    color: #444;
+    background-color: #e3f0ff; /* Azul muy claro */
+}
+
+/* Estilos para inputs y textarea */
+input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #2980b9;      /* Borde azul */
+    padding: 8px 14px;
+    border-radius: 5px;
+    background-color: #f8fbff;      /* Fondo casi blanco */
+    color: #222;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+}
+
+/* Estilos específicos para textarea */
+textarea {
+    min-height: 100px;              /* Altura mínima para el textarea */
+    min-width: 200px;
+    font-family: sans-serif;
+    resize: none;                   /* No permitir redimensionar */
+}
+
+/* Efecto al enfocar inputs y textarea */
+input:focus, textarea:focus {
+    border-color: #f7ca18;          /* Borde dorado al enfocar */
+    outline: none;
+    background-color: #e3f0ff;      /* Fondo azul claro al enfocar */
+}
+
+.form_input {
+    padding: 10px 20px;
+}
+
+form {
+    background-color: transparent;
+    padding: 20px 0;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+h2 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}

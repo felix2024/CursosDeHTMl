@@ -1,0 +1,27 @@
+.color-box {
+    width: 180px;
+    height: 80px;
+    margin: 15px;
+    display: inline-block;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.hex {
+    background: #e74c3c; /* Color hexadecimal */
+}
+.rgb {
+    background: rgb(52, 152, 219); /* Color RGB */
+}
+.rgba {
+    background: rgba(93, 46, 204, 0.7); /* Color RGBA */
+    color: #222;
+}
+.named {
+    background: gold; /* Color por nombre */
+    color: #222;
+}
