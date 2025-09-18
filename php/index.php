@@ -6,4 +6,4 @@
 
     // Imprime el valor de la variable
     echo $saludo;
-?>
+?>|
