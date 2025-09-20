@@ -4,14 +4,14 @@ if($_POST){
     $valorA = $_POST['valorA'];
     $valorB = $_POST['valorB'];
 
-    if($valorA != $valorB || $valorA > $valorB){
-        echo "El valor de A es diferente al valor de B y tambien es mayor";
+    if($valorA>$valorB){
+        echo "El valor de A es mayor que el valor de B";
     }else{
-        echo "El valor de A es igual al valor de B";
+        echo "El valor de A no es mayor que el valor de B";
     }
 
 } 
-
+  
 
 
 ?>
@@ -21,10 +21,10 @@ if($_POST){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operadores logicos</title>
+    <title>Operadores aritmeticos</title>
 </head>
 <body>
-    <form action="ejercicio10.php" method="post">
+    <form action="ejercicio12.php" method="post">
         Valor A:
         <input type="text"name="valorA">
         Valor B:
