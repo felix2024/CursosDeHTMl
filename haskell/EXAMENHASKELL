@@ -1,0 +1,103 @@
+module Examen where
+
+-- =========================================================
+-- 1) Lista de 5 enteros: eliminar en posición [0..4],
+--    recorrer y poner un 0 al final
+-- =========================================================
+
+-- Elimina el elemento en la posición dada y agrega un 0 al final
+deleteAtShift :: Int -> [Int] -> [Int]
+deleteAtShift pos xs
+  | pos < 0 || pos >= length xs = xs  -- posición inválida -> regresa igual
+  | otherwise = take pos xs ++ drop (pos + 1) xs ++ [0]
+
+
+-- =========================================================
+-- 2) Fusionar dos listas ordenadas en una tercera lista ordenada
+-- =========================================================
+
+mergeSorted :: [Int] -> [Int] -> [Int]
+mergeSorted [] ys = ys
+mergeSorted xs [] = xs
+mergeSorted (x:xs) (y:ys)
+  | x <= y    = x : mergeSorted xs (y:ys)
+  | otherwise = y : mergeSorted (x:xs) ys
+
+
+-- =========================================================
+-- 3) Número de día del año (no bisiesto) dado mes y día
+-- =========================================================
+
+type Mes  = Int
+type Dias = Int
+
+diasPorMes :: [(Mes, Dias)]
+diasPorMes = zip [1..12] [31,28,31,30,31,30,31,31,30,31,30,31]
+
+-- dayOfYear mes dia = día del año correspondiente
+dayOfYear :: Int -> Int -> Int
+dayOfYear mes dia =
+  let diasPrevios = sum [d | (m, d) <- diasPorMes, m < mes]
+  in diasPrevios + dia
+
+
+-- =========================================================
+-- 4) Días que faltan para terminar el año
+-- =========================================================
+
+daysLeft :: Int -> Int -> Int
+daysLeft mes dia = 365 - dayOfYear mes dia
+
+
+-- =========================================================
+-- 5) Serie Fibonacci, filtrar múltiplos de 3
+-- =========================================================
+
+-- Serie infinita de Fibonacci
+fibsInf :: [Int]
+fibsInf = 0 : 1 : zipWith (+) fibsInf (tail fibsInf)
+
+-- Toma los primeros n términos de Fibonacci
+fibs :: Int -> [Int]
+fibs n = take n fibsInf
+
+-- Filtra los múltiplos de 3
+multiplosDe3 :: [Int] -> [Int]
+multiplosDe3 xs = [x | x <- xs, x `mod` 3 == 0]
+
+
+-- =========================================================
+-- 6) Matriz NxN con T[i,j] = i + j
+--     (índices de 0 a N-1)
+-- =========================================================
+
+matrixSum :: Int -> [[Int]]
+matrixSum n =
+  [ [i + j | j <- [0..n-1]] | i <- [0..n-1] ]
+
+
+-- =========================================================
+-- 7) Suma de dos matrices 3x3
+-- =========================================================
+
+type Matrix = [[Int]]
+
+add3x3 :: Matrix -> Matrix -> Matrix
+add3x3 = zipWith (zipWith (+))
+
+
+-- =========================================================
+-- 8) Matriz identidad NxN
+-- =========================================================
+
+identity :: Int -> [[Int]]
+identity n =
+  [ [ if i == j then 1 else 0 | j <- [1..n] ] | i <- [1..n] ]
+
+
+-- =========================================================
+-- 9) Suma de cada fila de una matriz 3x3, resultado en lista B
+-- =========================================================
+
+rowSums :: [[Int]] -> [Int]
+rowSums = map sum
