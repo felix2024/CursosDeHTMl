@@ -1,0 +1,41 @@
+Cada ejercicio tiene un valor de 15 puntos. Si resuelve dos de sus problemas usando bloques do tiene 10 puntos extra.
+
+Leer por teclado una lista de 5 elementos numéricos enteros y una posición (entre 0 y 4). Eliminar el elemento situado en la posición dada sin dejar huecos, recorriendo los demás valores y dejando un cero en la última posición.
+
+Función que recibe dos listas de enteros, que estarán ordenados crecientemente. Generando  una tercera que contenga todos sus elementos, de forma que sigan ordenados.
+
+Almacene en una lista de tuplas el número de días que tiene cada mes (año no bisiesto), pida al usuario que le indique un mes (ej. 2 para febrero) y un día (ej. el día 15) y diga qué número de día es dentro del año (por ejemplo, el 15 de febrero sería el día número 46, el 31 de diciembre sería el día 365).
+
+A partir del programa del ejercicio anterior, que almacenaba en una tabla el número de días que tiene cada mes, crear otro que pida al usuario que le indique la fecha, detallando el día (1 al 31) y el mes (1=enero, 12=diciembre), como respuesta muestre en pantalla el número de días que quedan hasta final de año.
+
+Diseñe un programa que genere n elementos de la serie del fibonacci, en una lista y encontrar todos aquellos valores que sean múltiplos de 3, guardarlos en una nueva lista y presentarlos en forma ascendente y descendente  
+
+Crear una lista de listas de tamaño NxN y rellenarla de la siguiente forma: la posición T[n,m] debe contener n+m. Después se debe mostrar su contenido. Ejemplo
+
+N = 3
+
+0  1   2
+
+1  2   3
+
+2  3   4
+
+N = 4
+
+0  1   2   3
+
+1  2   3   4
+
+2  3   4   5
+
+3. Crear variables o leer de teclado dos listas de listas de tamaño 3x3, sumarlas como si se tratara de matrices y mostrar su suma. (En el siguiente ejemplo se obvian las comas y corchetes)
+
+1 2 3         4 5 6        5   7  9
+
+2 2 2     +   8 1 2    =   10  3  4
+
+5 2 1         1 9 5        6   11  6
+
+5. Crear una lista de listas de tamaño NxN y rellenarla de forma que los elementos de la diagonal principal sean 1 y el resto 0.
+
+6. Crear una lista de listas A de tamaño 3x3, y calcular en una nueva lista B la suma de cada lista que compone la lista A
