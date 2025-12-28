@@ -38,4 +38,367 @@ N = 4
 
 5. Crear una lista de listas de tamaño NxN y rellenarla de forma que los elementos de la diagonal principal sean 1 y el resto 0.
 
+
+Hola mi amor :3
+
+-- Eliminar elemento en posición i (0..4) y dejar 0 al final
+removeAtShift :: Int -> [Int] -> [Int]
+removeAtShift i xs =
+  let (before, after) = splitAt i xs
+  in take (length xs) (before ++ drop 1 after ++ repeat 0)
+
+-- Ejemplo de pequeño main
+main1 :: IO ()
+main1 = do
+  putStrLn "Introduce 5 enteros:"
+  xs <- sequence (replicate 5 readLn)
+  putStrLn "Posición (0-4):"
+  i  <- readLn
+  print (removeAtShift i xs)
+
+-- Fusionar dos listas crecientes en una tercera ordenada
+mergeSorted :: [Int] -> [Int] -> [Int]
+mergeSorted [] ys = ys
+mergeSorted xs [] = xs
+mergeSorted (x:xs) (y:ys)
+  | x <= y    = x : mergeSorted xs (y:ys)
+  | otherwise = y : mergeSorted (x:xs) ys
+
+-- (mes, dias) para año no bisiesto
+diasMesNoBisiesto :: [(Int, Int)]
+diasMesNoBisiesto =
+  zip [1..12] [31,28,31,30,31,30,31,31,30,31,30,31]
+
+-- Día del año (1..365) dado día y mes
+diaDelAnio :: Int -> Int -> Int
+diaDelAnio d m =
+  let diasPrevios = sum [dias | (mes, dias) <- diasMesNoBisiesto, mes < m]
+  in diasPrevios + d
+
+-- Días que quedan hasta fin de año
+diasHastaFinDeAnio :: Int -> Int -> Int
+diasHastaFinDeAnio d m = 365 - diaDelAnio d m
+
+-- Ejemplo de uso interactivo
+mainFechas1 :: IO ()
+mainFechas1 = do
+  putStrLn "Mes (1-12):"
+  m <- readLn
+  putStrLn "Dia:"
+  d <- readLn
+  putStrLn $ "Es el dia " ++ show (diaDelAnio d m) ++ " del año."
+
+mainFechas2 :: IO ()
+mainFechas2 = do
+  putStrLn "Mes (1-12):"
+  m <- readLn
+  putStrLn "Dia:"
+  d <- readLn
+  putStrLn $ "Quedan " ++ show (diasHastaFinDeAnio d m) ++ " dias hasta fin de año."
+
+FIBONACCI Y MULTIPLOS DE 3
+import Data.List (sort)
+
+-- Lista infinita de Fibonacci
+fibs :: [Integer]
+fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+
+-- Primeros n elementos de Fibonacci
+fibonacciN :: Int -> [Integer]
+fibonacciN n = take n fibs
+
+-- Múltiplos de 3 en la lista dada
+multiplosDe3 :: [Integer] -> [Integer]
+multiplosDe3 = filter (\x -> x `mod` 3 == 0)
+
+-- Orden ascendente y descendente
+ascendente :: Ord a => [a] -> [a]
+ascendente = sort
+
+descendente :: Ord a => [a] -> [a]
+descendente = reverse . sort
+
+-- Ejemplo de uso
+mainFib :: IO ()
+mainFib = do
+  putStrLn "n:"
+  n <- readLn
+  let serie    = fibonacciN n
+      m3       = multiplosDe3 serie
+      m3Asc    = ascendente m3
+      m3Desc   = descendente m3
+  putStrLn $ "Serie: " ++ show serie
+  putStrLn $ "Multiplos de 3 asc: " ++ show m3Asc
+  putStrLn $ "Multiplos de 3 desc: " ++ show m3Desc
+
+MATRICES (LISTA DE LISTAS)
+
+-- Matriz NxN con T[i][j] = i + j (indices 0..N-1)
+matrizSumaIndices :: Int -> [[Int]]
+matrizSumaIndices n =
+  [[i + j | j <- [0..n-1]] | i <- [0..n-1]]
+
+-- Suma de dos matrices del mismo tamaño
+sumarMatrices :: Num a => [[a]] -> [[a]] -> [[a]]
+sumarMatrices = zipWith (zipWith (+))
+
+-- Ejemplo 3x3
+matA :: [[Int]]
+matA = [[1,2,3],
+        [2,2,2],
+        [5,2,1]]
+
+matB :: [[Int]]
+matB = [[4,5,6],
+        [8,1,2],
+        [1,9,5]]
+
+matSumaEjemplo :: [[Int]]
+matSumaEjemplo = sumarMatrices matA matB
+
+MATRIZ IDENTIDAD
+-- Matriz identidad NxN
+matrizIdentidad :: Int -> [[Int]]
+matrizIdentidad n =
+  [[ if i == j then 1 else 0 | j <- [0..n-1]] | i <- [0..n-1]]
+
+-- Suma de cada fila de una matriz 3x3 (o cualquier matriz)
+sumaFilas :: Num a => [[a]] -> [a]
+sumaFilas = map sum
+
+-- Ejemplo con una 3x3
+matEj :: [[Int]]
+matEj = [[1,2,3],
+         [4,5,6],
+         [7,8,9]]
+
+bFilas :: [Int]
+bFilas = sumaFilas matEj
+TODO EN UN SOLO MODULO ---
+module Main where
+
+import Data.List (sort)
+
+--------------------------------
+-- 1) Eliminar elemento y desplazar
+--------------------------------
+
+removeAtShift :: Int -> [Int] -> [Int]
+removeAtShift i xs =
+  let (before, after) = splitAt i xs
+  in take (length xs) (before ++ drop 1 after ++ repeat 0)
+
+ej1 :: IO ()
+ej1 = do
+  putStrLn "Ejercicio 1: Eliminar elemento y desplazar (lista de 5 enteros)"
+  putStrLn "Introduce la lista como [a,b,c,d,e] :"
+  xs <- readLn :: IO [Int]
+  putStrLn "Posicion a eliminar (0-4):"
+  i  <- readLn
+  putStrLn $ "Resultado: " ++ show (removeAtShift i xs)
+
+--------------------------------
+-- 2) Fusionar dos listas ordenadas
+--------------------------------
+
+mergeSorted :: [Int] -> [Int] -> [Int]
+mergeSorted [] ys = ys
+mergeSorted xs [] = xs
+mergeSorted (x:xs) (y:ys)
+  | x <= y    = x : mergeSorted xs (y:ys)
+  | otherwise = y : mergeSorted (x:xs) ys
+
+ej2 :: IO ()
+ej2 = do
+  putStrLn "Ejercicio 2: Fusionar dos listas ordenadas crecientemente"
+  putStrLn "Introduce la primera lista ordenada, por ejemplo [1,3,5]:"
+  xs <- readLn :: IO [Int]
+  putStrLn "Introduce la segunda lista ordenada, por ejemplo [2,4,6]:"
+  ys <- readLn :: IO [Int]
+  putStrLn $ "Lista fusionada: " ++ show (mergeSorted xs ys)
+
+--------------------------------
+-- 3 y 4) Fechas y días del año
+--------------------------------
+
+diasMesNoBisiesto :: [(Int, Int)]
+diasMesNoBisiesto =
+  zip [1..12] [31,28,31,30,31,30,31,31,30,31,30,31]
+
+diaDelAnio :: Int -> Int -> Int
+diaDelAnio d m =
+  let diasPrevios = sum [dias | (mes, dias) <- diasMesNoBisiesto, mes < m]
+  in diasPrevios + d
+
+diasHastaFinDeAnio :: Int -> Int -> Int
+diasHastaFinDeAnio d m = 365 - diaDelAnio d m
+
+ej3 :: IO ()
+ej3 = do
+  putStrLn "Ejercicio 3: Numero de dia dentro del año"
+  putStrLn "Mes (1-12):"
+  m <- readLn
+  putStrLn "Dia:"
+  d <- readLn
+  putStrLn $ "Es el dia " ++ show (diaDelAnio d m) ++ " del año."
+
+ej4 :: IO ()
+ej4 = do
+  putStrLn "Ejercicio 4: Dias que quedan hasta fin de año"
+  putStrLn "Mes (1-12):"
+  m <- readLn
+  putStrLn "Dia:"
+  d <- readLn
+  putStrLn $ "Quedan " ++ show (diasHastaFinDeAnio d m) ++ " dias hasta fin de año."
+
+--------------------------------
+-- 5) Fibonacci y múltiplos de 3
+--------------------------------
+
+fibs :: [Integer]
+fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+
+fibonacciN :: Int -> [Integer]
+fibonacciN n = take n fibs
+
+multiplosDe3 :: [Integer] -> [Integer]
+multiplosDe3 = filter (\x -> x `mod` 3 == 0)
+
+ascendente :: Ord a => [a] -> [a]
+ascendente = sort
+
+descendente :: Ord a => [a] -> [a]
+descendente = reverse . sort
+
+ej5 :: IO ()
+ej5 = do
+  putStrLn "Ejercicio 5: Fibonacci y multiplos de 3"
+  putStrLn "n (cantidad de elementos de la serie):"
+  n <- readLn
+  let serie  = fibonacciN n
+      m3     = multiplosDe3 serie
+      m3Asc  = ascendente m3
+      m3Desc = descendente m3
+  putStrLn $ "Serie de Fibonacci: " ++ show serie
+  putStrLn $ "Multiplos de 3 ascendente: " ++ show m3Asc
+  putStrLn $ "Multiplos de 3 descendente: " ++ show m3Desc
+
+--------------------------------
+-- 6) Matriz NxN con T[i,j] = i+j
+--------------------------------
+
+matrizSumaIndices :: Int -> [[Int]]
+matrizSumaIndices n =
+  [[i + j | j <- [0..n-1]] | i <- [0..n-1]]
+
+--------------------------------
+-- 7) Suma de dos matrices 3x3
+--------------------------------
+
+sumarMatrices :: Num a => [[a]] -> [[a]] -> [[a]]
+sumarMatrices = zipWith (zipWith (+))
+
+--------------------------------
+-- 8) Matriz identidad NxN
+--------------------------------
+
+matrizIdentidad :: Int -> [[Int]]
+matrizIdentidad n =
+  [[ if i == j then 1 else 0 | j <- [0..n-1]] | i <- [0..n-1]]
+
+--------------------------------
+-- 9) Suma de filas de una 3x3
+--------------------------------
+
+sumaFilas :: Num a => [[a]] -> [a]
+sumaFilas = map sum
+
+--------------------------------
+-- Utilidades de IO
+--------------------------------
+
+printMatrix :: Show a => [[a]] -> IO ()
+printMatrix = mapM_ (putStrLn . unwords . map show)
+
+leerMatriz3x3 :: IO [[Int]]
+leerMatriz3x3 = do
+  putStrLn "Introduce 3 filas de 3 enteros cada una, por ejemplo: 1 2 3"
+  fila1 <- fmap (map read . words) getLine
+  fila2 <- fmap (map read . words) getLine
+  fila3 <- fmap (map read . words) getLine
+  return [fila1, fila2, fila3]
+
+ej6 :: IO ()
+ej6 = do
+  putStrLn "Ejercicio 6: Matriz NxN con T[i,j] = i + j (indices desde 0)"
+  putStrLn "Introduce N:"
+  n <- readLn
+  let m = matrizSumaIndices n
+  putStrLn "Matriz generada:"
+  printMatrix m
+
+ej7 :: IO ()
+ej7 = do
+  putStrLn "Ejercicio 7: Suma de dos matrices 3x3"
+  putStrLn "Matriz A:"
+  a <- leerMatriz3x3
+  putStrLn "Matriz B:"
+  b <- leerMatriz3x3
+  let s = sumarMatrices a b
+  putStrLn "Suma A + B:"
+  printMatrix s
+
+ej8 :: IO ()
+ej8 = do
+  putStrLn "Ejercicio 8: Matriz identidad NxN"
+  putStrLn "Introduce N:"
+  n <- readLn
+  let m = matrizIdentidad n
+  printMatrix m
+
+ej9 :: IO ()
+ej9 = do
+  putStrLn "Ejercicio 9: Suma de filas de una matriz 3x3"
+  a <- leerMatriz3x3
+  let b = sumaFilas a
+  putStrLn $ "Suma de cada fila: " ++ show b
+
+--------------------------------
+-- Main con menú
+--------------------------------
+
+main :: IO ()
+main = do
+  putStrLn "============================"
+  putStrLn "   Ejercicios en Haskell"
+  putStrLn "============================"
+  putStrLn "1) Eliminar elemento y desplazar en lista de 5 enteros"
+  putStrLn "2) Fusionar dos listas ordenadas"
+  putStrLn "3) Numero de dia dentro del año"
+  putStrLn "4) Dias que quedan hasta fin de año"
+  putStrLn "5) Fibonacci y multiplos de 3"
+  putStrLn "6) Matriz NxN con T[i,j] = i + j"
+  putStrLn "7) Suma de dos matrices 3x3"
+  putStrLn "8) Matriz identidad NxN"
+  putStrLn "9) Suma de filas de una matriz 3x3"
+  putStrLn "0) Salir"
+  putStrLn "Elige una opcion:"
+  op <- readLn :: IO Int
+  case op of
+    1 -> ej1
+    2 -> ej2
+    3 -> ej3
+    4 -> ej4
+    5 -> ej5
+    6 -> ej6
+    7 -> ej7
+    8 -> ej8
+    9 -> ej9
+    _ -> putStrLn "Saliendo..."
+
+
+
+
+
+
 6. Crear una lista de listas A de tamaño 3x3, y calcular en una nueva lista B la suma de cada lista que compone la lista A
